@@ -1,0 +1,12 @@
+import {
+  "NaIWaniubi/moonprove/src/core",
+  "NaIWaniubi/moonprove/src/verify",
+  "NaIWaniubi/moonprove/src/solver",
+  "NaIWaniubi/moonprove/src/symir",
+  "moonbitlang/x/fs",
+  "moonbitlang/core/env",
+  "moonbitlang/x/sys",
+  "moonbitlang/core/string",
+}
+
+pkgtype(kind: "executable")

@@ -1,0 +1,30 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> $GITHUB_PATH
+      - name: Version
+        run: moon version
+      - name: Check
+        run: moon check --target all
+      - name: Test
+        run: moon test --target wasm
+      - name: Build CLI
+        run: moon build --target native --release cmd/main
+      - name: Verify the example corpus
+        run: |
+          # Every example is run and the verdicts compared with what the file's
+          # header says it should get. A tool that changes its mind silently fails
+          # here rather than in a user's hands.
+          bash test/verify_corpus.sh
+      - name: CLI smoke
+        run: bash test/cli_smoke.sh

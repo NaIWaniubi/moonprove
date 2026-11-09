@@ -1,0 +1,103 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "NaIWaniubi/moonprove/src/core"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) struct Goal {
+  label : String
+  span : Span
+  assumptions : Array[Term]
+  conclusion : Term
+} derive(Eq, @debug.Debug)
+
+pub(all) enum GoalOutcome {
+  Holds
+  Violated(Map[Int32, Int32], Array[SolverStep])
+  Bounded(String)
+  Unknown(String)
+} derive(@debug.Debug)
+
+pub(all) struct GoalResult {
+  goal : Goal
+  outcome : GoalOutcome
+  paths : Int32
+  queries : Int32
+  millis : Int32
+} derive(@debug.Debug)
+
+pub(all) struct Pos {
+  line : Int32
+  col : Int32
+} derive(Eq, Hash, @debug.Debug)
+
+pub(all) struct Report {
+  results : Array[GoalResult]
+  vars : Array[SymVar]
+  functions : Array[String]
+  truncated : Int32
+} derive(@debug.Debug)
+
+pub(all) enum Sat {
+  Sat(Map[Int32, Int32])
+  Unsat
+  Unknown(String)
+} derive(@debug.Debug)
+
+pub(all) struct SolverStep {
+  kind : String
+  detail : String
+  depth : Int32
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Sort {
+  Int(Int32)
+  Bool
+  Nat
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Span {
+  start : Pos
+  end : Pos
+} derive(Eq, Hash, @debug.Debug)
+
+pub(all) struct SymVar {
+  id : Int32
+  name : String
+  sort : Sort
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Term {
+  Lit(Int32)
+  Var(Int32)
+  Add(Term, Term)
+  Sub(Term, Term)
+  MulLit(Term, Int32)
+  DivLit(Term, Int32)
+  ModLit(Term, Int32)
+  Div(Term, Term)
+  Rem(Term, Term)
+  Neg(Term)
+  Abs(Term)
+  Wrap(Term, Int32)
+  Ite(Term, Term, Term)
+  Lt(Term, Term)
+  Le(Term, Term)
+  Eq(Term, Term)
+  Ne(Term, Term)
+  Not(Term)
+  And(Term, Term)
+  Or(Term, Term)
+  True
+  False
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

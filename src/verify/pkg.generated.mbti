@@ -1,0 +1,21 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "NaIWaniubi/moonprove/src/verify"
+
+import {
+  "NaIWaniubi/moonprove/src/core",
+}
+
+// Values
+pub fn parse_errors(String) -> Array[String]
+
+pub fn term_text(@core.Term) -> String
+
+pub fn verify(String, width? : Int32) -> @core.Report
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

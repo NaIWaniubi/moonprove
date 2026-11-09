@@ -1,0 +1,42 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "NaIWaniubi/moonprove/src/explore"
+
+import {
+  "NaIWaniubi/moonprove/src/core",
+  "NaIWaniubi/moonprove/src/symir",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn verify_fn(@symir.Fn, Int32) -> FnResult
+
+// Errors
+
+// Types and methods
+pub(all) struct FnResult {
+  name : String
+  goals : Array[GoalDraft]
+  truncated : Int32
+} derive(@debug.Debug)
+
+pub(all) struct GoalDraft {
+  goal : @core.Goal
+  vars : Array[@core.SymVar]
+  outcome : @core.GoalOutcome
+  paths : Int32
+} derive(@debug.Debug)
+
+pub(all) struct PathState {
+  assumes : Array[@core.Term]
+  store : Map[String, SymVal]
+  mut loops : Int32
+} derive(@debug.Debug)
+
+pub(all) struct SymVal {
+  term : @core.Term
+  sort : @core.Sort
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

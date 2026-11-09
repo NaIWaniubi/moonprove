@@ -1,0 +1,10 @@
+warnings = "-79"
+
+import {
+  "NaIWaniubi/moonprove/src/core",
+}
+
+
+import {
+  "NaIWaniubi/moonprove/src/core",
+} for "test"

@@ -1,0 +1,7 @@
+warnings = "-79"
+
+import {
+  "NaIWaniubi/moonprove/src/core",
+  "NaIWaniubi/moonprove/src/solver",
+  "NaIWaniubi/moonprove/src/symir",
+}

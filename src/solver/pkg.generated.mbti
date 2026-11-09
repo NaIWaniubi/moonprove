@@ -1,0 +1,89 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "NaIWaniubi/moonprove/src/solver"
+
+import {
+  "NaIWaniubi/moonprove/src/core",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn as_constraint(@core.Term) -> LCon?
+
+pub fn as_linear(@core.Term) -> Linear?
+
+pub fn const_value(@core.Term) -> Int32
+
+pub fn euclid_div(Int32, Int32) -> Int32
+
+pub fn euclid_mod(Int32, Int32) -> Int32
+
+pub fn eval_bool(@core.Term, Map[Int32, Int32]) -> Bool
+
+pub fn eval_int_opt(@core.Term, Map[Int32, Int32]) -> Int32?
+
+pub fn eval_tristate(@core.Term, Map[Int32, Int32]) -> Tristate
+
+pub fn flatten_conjunct(@core.Term, Array[@core.Term]) -> Unit
+
+pub fn half_range(Int32) -> Int32
+
+pub fn is_constant(@core.Term) -> Bool
+
+pub fn refute(Array[@core.Term]) -> Refuted
+
+pub fn refute_with(Array[@core.Term], Map[Int32, @core.Sort]) -> Refuted
+
+pub fn simplify(@core.Term) -> @core.Term
+
+pub fn simplify_with(@core.Term, Map[Int32, @core.Sort]) -> @core.Term
+
+pub fn solve(Array[@core.SymVar], Array[@core.Term], budget? : Budget) -> (@core.Sat, Trace)
+
+pub fn wrap(Int32, Int32) -> Int32
+
+// Errors
+
+// Types and methods
+pub(all) struct Budget {
+  nodes : Int32
+  assignments : Int32
+} derive(Eq, @debug.Debug)
+pub fn Budget::default() -> Self
+
+pub(all) struct LCon {
+  lin : Linear
+  rel : Rel
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Linear {
+  coeffs : Map[Int32, Int32]
+  constant : Int32
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Refuted {
+  Yes
+  No
+  Outside
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Rel {
+  LtZero
+  LeZero
+  EqZero
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Trace {
+  steps : Array[@core.SolverStep]
+  bounds : Array[(Int32, Int32, Int32)]
+  tried : Int32
+} derive(@debug.Debug)
+
+pub(all) enum Tristate {
+  TTrue
+  TFalse
+  TUnknown
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
