@@ -1,8 +1,6 @@
 import {
   "NaIWaniubi/moonprove/src/core",
   "NaIWaniubi/moonprove/src/verify",
-  "NaIWaniubi/moonprove/src/symir",
-  "moonbitlang/core/string",
 }
 
 supported_targets = "+js"
