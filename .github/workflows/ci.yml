@@ -12,6 +12,10 @@ jobs:
         run: |
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
           echo "$HOME/.moon/bin" >> $GITHUB_PATH
+      - name: Refresh the registry index
+        # The runner's cached registry index can predate the dependencies this
+        # module needs, which fails the build plan before any code is compiled.
+        run: moon update
       - name: Version
         run: moon version
       - name: Check
