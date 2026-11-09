@@ -65,7 +65,7 @@ fn main {
         }
       }
       i = i + 2
-    } else if arg.starts_with("-") {
+    } else if arg.has_prefix("-") {
       fail(2, "unknown flag " + arg)
     } else {
       if path != "" {

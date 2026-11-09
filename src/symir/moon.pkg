@@ -1,6 +1,5 @@
 warnings = "-79"
 
 import {
-  "NaIWaniubi/moonprove/src/core",
   "moonbitlang/core/string",
 }

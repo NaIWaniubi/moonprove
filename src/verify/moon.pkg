@@ -4,6 +4,4 @@ import {
   "NaIWaniubi/moonprove/src/core",
   "NaIWaniubi/moonprove/src/symir",
   "NaIWaniubi/moonprove/src/explore",
-  "NaIWaniubi/moonprove/src/solver",
-  "moonbitlang/core/env",
 }

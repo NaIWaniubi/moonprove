@@ -1014,7 +1014,8 @@ fn term_range(t : @core.Term, ranges : Map[Int32, (Int, Int)]) -> (Int, Int)? {
     Abs(a) =>
       match term_range(a, ranges) {
         Some(r) => {
-          let lo = if r.0 < 0 { 0 - r.0 } else { r.0 }
+          // |t| is non-negative, so its lower bound is always 0; only the upper
+          // bound needs the sign analysis below.
           let hi = if r.0 <= 0 && r.1 >= 0 {
             let a1 = 0 - r.0
             let a2 = r.1

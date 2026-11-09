@@ -324,13 +324,6 @@ fn eliminate(cons : Array[LCon], id : Int32) -> Array[LCon] {
 }
 
 ///|
-fn drop_variable(c : LCon, id : Int32) -> LCon {
-  let coeffs = c.lin.coeffs.copy()
-  ignore(coeffs.remove(id))
-  { lin: { coeffs, constant: c.lin.constant }, rel: c.rel }
-}
-
-///|
 /// The resolvent of a lower and an upper bound on `id`.
 fn combine(lower : LCon, upper : LCon, id : Int32) -> LCon? {
   let a = lower.lin.coeffs.get(id).unwrap_or(0)

@@ -5985,24 +5985,24 @@ function _M0FP410NaIWaniubi9moonprove3src5symir5parse(source) {
   }
   return new _M0TP410NaIWaniubi9moonprove3src5symir7Program(functions, errors);
 }
-function _M0IP410NaIWaniubi9moonprove3src6solver3RelPB2Eq5equal(_x_711, _x_712) {
-  switch (_x_711) {
+function _M0IP410NaIWaniubi9moonprove3src6solver3RelPB2Eq5equal(_x_707, _x_708) {
+  switch (_x_707) {
     case 0: {
-      if (_x_712 === 0) {
+      if (_x_708 === 0) {
         return true;
       } else {
         return false;
       }
     }
     case 1: {
-      if (_x_712 === 1) {
+      if (_x_708 === 1) {
         return true;
       } else {
         return false;
       }
     }
     default: {
-      if (_x_712 === 2) {
+      if (_x_708 === 2) {
         return true;
       } else {
         return false;
@@ -9865,7 +9865,7 @@ function _M0FP410NaIWaniubi9moonprove3src7explore10eval__expr(engine, expr, stor
 function _M0FP410NaIWaniubi9moonprove3src7explore11copy__state(state) {
   return new _M0TP410NaIWaniubi9moonprove3src7explore9PathState(_M0MPC15array5Array4copyGRP410NaIWaniubi9moonprove3src4core4TermE(state.assumes), _M0MPB3Map4copyGsRP410NaIWaniubi9moonprove3src7explore6SymValE(state.store), state.loops);
 }
-function _M0FP410NaIWaniubi9moonprove3src7explore10exec__call(engine, call, incoming, width) {
+function _M0FP410NaIWaniubi9moonprove3src7explore10exec__call(engine, call, incoming, _width) {
   const out = [];
   const _bind = incoming.length;
   let _tmp = 0;

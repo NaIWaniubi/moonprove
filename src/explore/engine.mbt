@@ -482,7 +482,7 @@ fn exec_call(
   engine : Engine,
   call : @symir.CallStmt,
   incoming : Array[PathState],
-  width : Int,
+  _width : Int,
 ) -> Array[PathState] {
   let out : Array[PathState] = []
   for state in incoming {
