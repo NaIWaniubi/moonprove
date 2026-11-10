@@ -15,6 +15,5 @@ preferred_target = "wasm"
 description = "Bounded symbolic execution with counterexamples for MoonBit"
 
 import {
-  "moonbitlang/parser@0.4.6",
   "moonbitlang/x@0.5.1",
 }
