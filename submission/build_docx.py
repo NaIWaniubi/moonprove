@@ -111,7 +111,9 @@ def build():
             paragraph.paragraph_format.first_line_indent = Mm(-2.5)
             paragraph.paragraph_format.space_before = Pt(0)
             paragraph.paragraph_format.space_after = Pt(1)
-            add_runs(paragraph, text)
+            # The List Number style supplies the number; keeping the markdown
+            # marker would print "1. 1." in front of every item.
+            add_runs(paragraph, re.sub(r'^\d+\.\s+', '', text))
         elif text.startswith('- '):
             paragraph = doc.add_paragraph(style='List Bullet')
             paragraph.paragraph_format.left_indent = Mm(3.5)
