@@ -9,7 +9,7 @@
 // decided (a distinct code so CI can tell "not proven" from "disproven").
 
 ///|
-let tool_version : String = "0.1.0"
+let tool_version : String = "0.1.1"
 
 ///|
 fn usage() -> Unit {
