@@ -184,6 +184,11 @@ fn f(n : nat) -> Int {
 
 ---
 
+## 申报书
+
+一页项目申报书：[submission/PROPOSAL.pdf](submission/PROPOSAL.pdf)（Markdown 源：`PROPOSAL.md`）。
+按赛事要求的八点结构写：项目名称、简介、方向与通用性、三个以上使用场景、核心功能、原创性、移植说明、仓库链接。
+
 ## 对照赛事验收标准
 
 十一月黑客松的验收标准有六条，逐条对到这里的东西：
