@@ -8,7 +8,7 @@ moonprove — 把断言变成证明的 MoonBit 有界验证器
 
 moonprove 读入带契约的 MoonBit 风格代码，对每条 `assert` / `require` / `ensure` / `invariant` 给出三种判决之一：**证明成立**、**被反例推翻**、或**明确的证不出来**。
 
-差别在第三种。多数检查器只会假设"进了 `if x < 0` 就说明下一行 `x >= 0`"，把这类假设堆成"没问题"的报告——断言真错了它也说没问题。moonprove 对每条义务取否命题交给求解器问"可满足吗"：不可满足就是证明，可满足就给出具体取值当反例，两头没结论就如实说证不出来。已发布 `NaIWaniubi/moonprove@0.1.1`，CLI 与浏览器 playground 是同一份代码编译到 native 与 wasm。
+差别在第三种。多数检查器只会假设"进了 `if x < 0` 就说明下一行 `x >= 0`"，把这类假设堆成"没问题"的报告——断言真错了它也说没问题。moonprove 对每条义务取否命题交给求解器问"可满足吗"：不可满足就是证明，可满足就给出具体取值当反例，两头没结论就如实说证不出来。已发布 `NaIWaniubi/moonprove@0.2.0`，CLI 与浏览器 playground 是同一份代码编译到 native 与 wasm。
 
 ## 3 项目方向与通用性
 
@@ -27,8 +27,8 @@ moonprove 读入带契约的 MoonBit 风格代码，对每条 `assert` / `requir
 - **两个方向来自不同代码路径**：`Unsat`（证明）只来自前三者，`Sat`（反例）只来自重新校验过的模型，中间是 `Unknown`；
 - **路径敏感符号执行**，循环用归纳而非展开；无 `invariant` 的循环得 `bounded` 且路径保守继续；
 - **验证域显式声明**：每份报告打印 `domain:` 那一行，让证明与反例谈同一集合；
-- **CLI**（`verify`/`explain`/`dump`）+ **浏览器 playground**；
-- 质量证据：47 个单元测试（含与暴力枚举逐例对拍）、10 个语料样例判决与 `EXPECT` 行逐条核对、CLI 冒烟覆盖退出码与 JSON、浏览器 e2e 读 DOM 验证，全目标零警告。3,706 有效行是刻意的取舍：行数花在判定过程的可信度上。开发中测试抓出三个会导致**错误证明**的缺陷（`Nat` 无范围、32 位宽度溢出、系数抵消为 0 掩盖矛盾），均已修复并记入 `docs/DESIGN.md`。
+- **CLI**（`verify`/`explain`/`dump`）+ **浏览器 playground**；输出支持 text / JSON / SARIF 2.1.0，`violated` 直接进 GitHub code scanning 的 PR 标注；
+- 质量证据：54 个单元测试（含与暴力枚举逐例对拍、SARIF 形状校验）、10 个语料样例判决与 `EXPECT` 行逐条核对、CLI 冒烟覆盖退出码与 JSON、浏览器 e2e 读 DOM 验证，全目标零警告。3,706 有效行是刻意的取舍：行数花在判定过程的可信度上。开发中测试抓出三个会导致**错误证明**的缺陷（`Nat` 无范围、32 位宽度溢出、系数抵消为 0 掩盖矛盾），均已修复并记入 `docs/DESIGN.md`。
 
 ## 6 原创性
 
@@ -40,4 +40,4 @@ moonprove 读入带契约的 MoonBit 风格代码，对每条 `assert` / `requir
 
 ## 8 GitHub 仓库链接
 
-https://github.com/NaIWaniubi/moonprove —— 提交连续，CI 与 Pages 绿色，最新 `@0.1.1`。
+https://github.com/NaIWaniubi/moonprove —— 提交连续，CI 与 Pages 绿色，最新 `@0.2.0`。
