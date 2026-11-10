@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.0 — 2026-11-10
+
+- **SARIF 2.1.0 output** (`--format sarif`, or `--json` for the plain shape). A
+  verifier a CI cannot read is a verifier nobody runs twice: `violated` maps to
+  `error`, `undecided` to `warning`, and proven obligations are emitted at `none`
+  so a reviewer sees what was checked, not only what failed. Counterexamples are
+  rendered with the variable's own name (`x = -1073741824`, not `v1 = ...`).
+- `--format` rejects an unknown value with exit 2 instead of falling back to text.
+- Seven tests pin the SARIF shape (version, driver, rule ids, level per verdict,
+  location line, named counterexample, escaping); the CLI smoke parses a real
+  document and checks the same fields.
+- Removed the empty `src/rules` directory left over from the skeleton.
+
 ## 0.1.1 — 2026-11-10
 
 - Dropped `moonbitlang/parser` from the module's dependencies. The surface

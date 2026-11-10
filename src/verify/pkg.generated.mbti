@@ -6,9 +6,13 @@ import {
 }
 
 // Values
+pub fn escape(String) -> String
+
 pub fn parse_errors(String) -> Array[String]
 
 pub fn term_text(@core.Term) -> String
+
+pub fn to_sarif(@core.Report, String, String) -> String
 
 pub fn verify(String, width? : Int32) -> @core.Report
 

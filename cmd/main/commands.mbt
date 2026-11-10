@@ -30,7 +30,7 @@ fn render_model(model : Map[Int32, Int]) -> String {
 }
 
 ///|
-fn run_verify(source : String, json : Bool, width : Int) -> Unit {
+fn run_verify(source : String, format : String, width : Int, path : String) -> Unit {
   let half = @solver.half_range(width)
   let errors = @verify.parse_errors(source)
   if errors.length() > 0 {
@@ -49,8 +49,10 @@ fn run_verify(source : String, json : Bool, width : Int) -> Unit {
       _ => undecided = undecided + 1
     }
   }
-  if json {
+  if format == "json" {
     println(render_json(report))
+  } else if format == "sarif" {
+    println(@verify.to_sarif(report, tool_version, path))
   } else {
     for r in report.results {
       let line = "line " + r.goal.span.start.line.to_string() +

@@ -9,7 +9,7 @@
 // decided (a distinct code so CI can tell "not proven" from "disproven").
 
 ///|
-let tool_version : String = "0.1.1"
+let tool_version : String = "0.2.0"
 
 ///|
 fn usage() -> Unit {
@@ -46,14 +46,23 @@ fn main {
     return
   }
   let mut path = ""
-  let mut json = false
+  let mut format = "text"
   let mut width = 32
   let mut i = 2
   while i < argv.length() {
     let arg = argv[i]
     if arg == "--json" {
-      json = true
+      format = "json"
       i = i + 1
+    } else if arg == "--format" {
+      if i + 1 >= argv.length() {
+        fail(2, "--format needs a value (text, json, sarif)")
+      }
+      format = argv[i + 1]
+      if format != "text" && format != "json" && format != "sarif" {
+        fail(2, "unknown format " + format + " (use text, json or sarif)")
+      }
+      i = i + 2
     } else if arg == "--width" {
       if i + 1 >= argv.length() {
         fail(2, "--width needs a value")
@@ -85,7 +94,7 @@ fn main {
     }
   }
   match command {
-    "verify" => run_verify(source, json, width)
+    "verify" => run_verify(source, format, width, path)
     "explain" => run_explain(source)
     "dump" => run_dump(source)
     _ => fail(2, "unknown command " + command)

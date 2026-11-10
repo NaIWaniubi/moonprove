@@ -136,6 +136,7 @@ bin=_build/native/release/build/cmd/main/main.exe
 
 $bin verify examples/06_loop.mbt                # 逐条义务 + 判决
 $bin verify examples/10_bad_assert.mbt --json   # 机器可读
+$bin verify examples/10_bad_assert.mbt --format sarif   # 给 CI / GitHub code scanning
 $bin explain examples/02_binary_search.mbt      # 求解器自己的叙述
 $bin dump examples/01_abs.mbt                   # 解析结果
 
@@ -151,6 +152,10 @@ bash test/cli_smoke.sh                          # 退出码、JSON 形状、错�
 | 1 | 至少一条被推翻 |
 | 2 | 用法错误 / 读不到文件 / 语法错误 |
 | 3 | 有义务未能判定（既没证明也没推翻） |
+
+`--format` 取 `text`（默认）/ `json` / `sarif`。SARIF 2.1.0 是 GitHub code scanning
+吃的格式：`violated` 是 `error`，`undecided` 是 `warning`，`proven` 是 `none`——
+被证明的也列出来，这样 reviewer 在 PR 里看到的是"检查了什么"，不只是"什么失败了"。
 
 `3` 单独存在是有意的：CI 需要能区分"代码有问题"和"工具没搞定"。把两者混成同一个非零码，一次 `undefined` 就会被当成回归。
 

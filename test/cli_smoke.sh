@@ -93,6 +93,37 @@ case "$out16" in
   *) echo "FAIL --width 16: $out16" >&2; fails=$((fails + 1)) ;;
 esac
 
+# SARIF is the CI-facing format: it has to parse and carry the verdict as a level.
+set +e
+sarif="$(run verify examples/10_bad_assert.mbt --format sarif)"
+set -e
+printf '%s' "$sarif" | node -e '
+let s = "";
+process.stdin.on("data", (d) => (s += d)).on("end", () => {
+  const j = JSON.parse(s);
+  if (j.version !== "2.1.0") throw new Error("bad sarif version: " + j.version);
+  const run = j.runs[0];
+  if (run.tool.driver.name !== "moonprove") throw new Error("bad driver");
+  const ids = run.tool.driver.rules.map((r) => r.id);
+  for (const want of ["proven", "violated", "undecided"]) {
+    if (!ids.includes(want)) throw new Error("missing rule " + want);
+  }
+  const r = run.results[0];
+  if (r.ruleId !== "violated" || r.level !== "error") throw new Error("bad result");
+  if (!r.locations[0].physicalLocation.artifactLocation.uri.endsWith("examples/10_bad_assert.mbt")) {
+    throw new Error("bad uri");
+  }
+  if (!r.message.text.includes("x = ")) throw new Error("counterexample not named: " + r.message.text);
+});
+' || { echo "FAIL sarif shape" >&2; fails=$((fails + 1)); }
+
+# An unknown --format is a usage error, not a silent fallback to text.
+set +e
+run verify examples/06_loop.mbt --format xml > /dev/null 2>&1
+code=$?
+set -e
+check "bad --format exits 2" "2" "$code"
+
 if [ "$fails" -ne 0 ]; then
   echo "cli smoke FAILED: $fails check(s)" >&2
   exit 1
